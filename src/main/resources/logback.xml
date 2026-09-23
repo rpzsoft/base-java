@@ -1,0 +1,46 @@
+<configuration scan="true" scanPeriod="15 seconds" debug="false">
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS, UTC}-[%thread] %-5level %logger{36} [%line] - %msg%n%ex{full}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILES_DIR}/rpz.log</file>
+        <append>true</append>
+        <prudent>true</prudent>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS, UTC}-[%thread] %-5level %logger{36} [%line] - %msg%n%ex{full}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_FILES_DIR}/rpz.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>-->
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT" />
+        <!--<discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <neverBlock>false</neverBlock> -->
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <logger name="com.rpz" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="ASYNC" />-->
+    </root>
+</configuration>
