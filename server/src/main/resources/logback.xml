@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FILES_DIR}/rpz.log</file>
+        <file>logs/rpz.log</file>
         <append>true</append>
         <prudent>true</prudent>
 
@@ -18,7 +18,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOG_FILES_DIR}/rpz.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/rpz.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>-->

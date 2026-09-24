@@ -37,11 +37,11 @@ public class Server {
     void start() throws Exception {
         final SslContext sslCtx;
         // Configure SSL. For prod, we must use proxy/LB infront of the server to terminate SSL.
-        //here SSL is used only fro testing
+        //here SSL is used only for testing
         if(Conf.SSL) {
             final String cafile = Conf.caPath();
             final String keyfile = Conf.keyPath();
-            if(cafile == null || cafile.isEmpty() || keyfile == null || keyfile.isEmpty()) {
+            if(cafile.isEmpty() || keyfile.isEmpty()) {
                 logger.info("Using selfsigned certificate!");
                 SelfSignedCertificate ssc = new SelfSignedCertificate();
                 sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();

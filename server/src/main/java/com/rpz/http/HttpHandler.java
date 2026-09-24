@@ -64,7 +64,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
             }
 
             headers.set(CONTENT_TYPE, APPLICATION_JSON);
-            headers.set("Access-Control-Allow-Origin", "*"); //since local server
+            headers.set("Access-Control-Allow-Origin", "*");
 
             if (keepAlive) {
                 if (!req.protocolVersion().isKeepAliveDefault()) {
